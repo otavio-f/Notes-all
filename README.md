@@ -16,7 +16,7 @@ by request. Other details must be ommitted from requests and responses.
 |Last modified|"last_modified"/"lastModified"|Timestamp|Server, at modification|
 ***
 
-## Endpoints ##
+## API ##
 The common endpoint must be **api/v1/**. Api implements the CRUD operations, the details can be seen on the table below.
 
 |Title|Endpoint|Method|Request body|On Success|On Fail|
