@@ -23,6 +23,6 @@ The common endpoint must be **api/v1/**. Api implements the CRUD operations, the
 |---|---|---|---|---|---|
 |Fetch All|/api/v1/|GET| |200-Ok, response body has list with all notes|500-Internal Error|
 |Fetch One|api/v1/{id}|GET| |200-Ok, response body has the note details|404-Not Found|
-|Create|api/v1/|POST|note details|201-Created, Location header points to the new resource|500-Internal Error|
+|Create|api/v1/|POST|note details|201-Created, Location header points to the new resource|400-Bad Request or 500-Internal Error|
 |Update|api/v1/{id}|PUT or POST|note details|204-No Content|404-Not Found or 500-Internal Error|
 |Delete|api/v1/{id}|DELETE| |204-No Content|404-Not Found or 500-Internal Error|
