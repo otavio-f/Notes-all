@@ -1,4 +1,4 @@
-# Notes-all
+# VerySimpleNotes
 The same app in a number of frameworks
 
 The main objective of this repository is to demonstrate the implementation of the "same app" in different languages, with different frameworks.
