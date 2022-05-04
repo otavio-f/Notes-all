@@ -9,6 +9,7 @@ import me.otavio.notes.model.Note;
 
 /**
  * A singleton class to store Note
+ * This is a placeholder for the real database
  * @author otavi
  *
  */
@@ -26,24 +27,37 @@ public class NoteRepository {
 	
 	private NoteRepository() {
 		notes = new ArrayList<Note>();
-		Note note1 = new Note();
+	/*	Note note1 = new Note();
 		note1.setTitle("OK");
 		note1.setContent("VERY LONG CONTENT");
 		note1.setCreatedAt(Instant.now());
 		note1.setLastModified(Instant.now());
 		this.save(note1);
+		
+
+		Note note2 = new Note();
+		note2.setTitle("OK");
+		note2.setContent("VERY LONG CONTENT");
+		note2.setCreatedAt(Instant.now());
+		note2.setLastModified(Instant.now());
+		this.save(note2);
+	*/
 	}
 	
 	private int findNextId() {
 		boolean found = false;
-		int index;
-		for (index = 0; index >= notes.size(); index++) {
+		int index = 1;
+		do {
 			for (Note note : notes) {
 				found = (note.getId() == index);
-				if (found) break;
+				if (found) {
+					index++;
+					break;
+				}
 			}
-			if(!found) break;
-		}
+		} while (found);
+		
+		// System.out.printf("Found next id: %d\n", index);
 		return index;
 	}
 	

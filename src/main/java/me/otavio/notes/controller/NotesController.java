@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +30,21 @@ public class NotesController {
 	// @Autowired
 	private NoteRepository repository;
 	
+	
 	@Autowired
 	public NotesController() {
 		repository = NoteRepository.getInstance();
+	}
+	
+	/**
+	 * Validates the fields of a NoteDTO object
+	 * @param data The DTO to be validated
+	 * @return true if the data is valid, else false
+	 */
+	private boolean isValid(NoteDTO data) {
+		if (data.getTitle() == null) return false;
+		if (data.getContent() == null) return false;
+		return true;
 	}
 	
 	/**
@@ -88,6 +101,8 @@ public class NotesController {
 	
 	@PostMapping("/")
 	public ResponseEntity<String> add(@RequestBody NoteDTO item) {
+		if (!isValid(item))
+			return ResponseEntity.badRequest().build();
 		Note note = convert(item);
 		Instant timestamp = Instant.now();
 		note.setCreatedAt(timestamp);
@@ -99,7 +114,10 @@ public class NotesController {
 	}
 	
 	@PutMapping("/{id}")
+	@PostMapping("/{id}")
 	public ResponseEntity<Object> update(@PathVariable(name="id") int id, @RequestBody NoteDTO item) {
+		if (!isValid(item))
+			return ResponseEntity.badRequest().build();
 		Optional<Note> result = repository.getById(id);
 		if (result.isEmpty())
 			return ResponseEntity.notFound().build();
